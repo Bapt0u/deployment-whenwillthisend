@@ -48,18 +48,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata: 
   name: ingress-wwte
+  namespace: wwte
   annotations:
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: wwte
   rules: 
-  - host: wwte.example.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service: 
-            name: lb-wwte
-            port:
-              number: 80
+    - host: wwte.example.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: 
+                name: lb-wwte
+                port:
+                  number: 80
